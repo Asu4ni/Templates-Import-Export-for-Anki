@@ -12,9 +12,9 @@ Functions & Things to notice
     + Each folder in the chosen directory will be regarded as each individual note type to be imported, matched by the name of the folder.
     + Folders or template files without corresponding note types or cards in Anki will be ignored. The add-on won't create note types and cards as a result.
     + Therefore, importing the directory which was exported earlier is recommended.
-+ **Configure**: some configurables settings in JSON format
++ **Configure**: some configurable settings in JSON format
     + *delimiter between front and back template*: the demimiter for separating front & back templates in each card. Default: `` ```<br> `` (``<br>`` is line break)
-    
+
 Others
 ----
 The source can be found on GitHub: https://github.com/Asu4ni/Templates-Import-Export-for-Anki
