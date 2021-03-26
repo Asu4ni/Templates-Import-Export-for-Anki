@@ -17,4 +17,4 @@ Functions & Things to notice
     
 Others
 ----
-The source can be found on GitHub: https://github.com/Asu4ni
+The source can be found on GitHub: https://github.com/Asu4ni/Templates-Import-Export-for-Anki
