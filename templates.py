@@ -37,6 +37,7 @@ def import_tmpls():
         nt = window.col.models.byName(name)
         if not nt: continue
 
+        count = 0
         file = path.join(root, name, _css_name)
         if os.path.exists(file):
             with open(file, "r", encoding="utf-8") as f:
@@ -47,9 +48,14 @@ def import_tmpls():
             if os.path.exists(file):
                 with open(file, "r", encoding="utf-8") as f:
                     tmpl[_anki_front], _, tmpl[_anki_back] = f.read().partition(_delimiter)
-                count_template += 1
-        window.col.models.save(nt)
+                count += 1
+        try:
+            window.col.models.save(nt)
+        except Exception:
+            gui.show_error("note type \"{}\" contains errors!!".format(name))
+            continue
         count_notetype += 1
+        count_template += count
     aqt.utils.tooltip("imported (Template: {} from NoteType:{})".format(count_template, count_notetype), 5000)
 
 
