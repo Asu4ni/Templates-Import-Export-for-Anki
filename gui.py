@@ -51,8 +51,9 @@ def show_error(msg: str, err_type: str = "all"):
     err.showMessage(msg, err_type)
 
 
-def get_dir() -> str:
-    return aqt.QFileDialog.getExistingDirectory(window, "Select a Directory")
+def get_dir():
+    folder = aqt.QFileDialog.getExistingDirectory(window, "Select a Directory")
+    return folder if len(folder) != 0 else None
 
 
 err = None

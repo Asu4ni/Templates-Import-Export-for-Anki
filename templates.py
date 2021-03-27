@@ -29,6 +29,7 @@ def _reload_config():
 
 def import_tmpls():
     root = gui.get_dir()
+    if not root: return
     _reload_config()
 
     notetypes = [item for item in os.listdir(root) if os.path.isdir(path.join(root, item))]
@@ -75,6 +76,7 @@ def import_tmpls():
 
 def export_tmpls():
     root = gui.get_dir()
+    if not root: return
     _reload_config()
 
     count_notetype = 0
