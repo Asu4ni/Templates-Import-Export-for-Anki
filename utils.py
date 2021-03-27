@@ -2,7 +2,7 @@ from aqt import mw as window
 from . import gui
 
 _config_map = {
-    "delimeter": "delimiter between front and back template",
+    "delimiter": "delimiter between front and back template",
     "mergeCSS": "insert global CSS before individual ones of all note types",
     "cssName": "CSS file name",
     "tmplExt": "filename extensions for card template files"

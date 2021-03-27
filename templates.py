@@ -14,12 +14,15 @@ _anki_back = "afmt"
 # config
 _delimiter = None
 _css_name = None
+_tmpl_ext = None
 
 
 def _reload_config():
-    global _delimiter, _css_name
+    utils.reload_config()
+    global _delimiter, _css_name, _tmpl_ext
     _delimiter = utils.cfg("delimiter")
     _css_name = utils.cfg("cssName")
+    _tmpl_ext = utils.cfg("tmplExt")
 
 
 def import_tmpls():
@@ -40,7 +43,7 @@ def import_tmpls():
                 nt[_anki_css] = f.read()
         for tmpl in nt.get(_anki_templates, []):
             if _anki_name not in tmpl: continue
-            file = path.join(root, name, tmpl[_anki_name])
+            file = path.join(root, name, tmpl[_anki_name] + _tmpl_ext)
             if os.path.exists(file):
                 with open(file, "r", encoding="utf-8") as f:
                     tmpl[_anki_front], _, tmpl[_anki_back] = f.read().partition(_delimiter)
@@ -73,7 +76,7 @@ def export_tmpls():
             except KeyError:
                 gui.show_error("A template in notetype \"{}\" has no name!!".format(notetype_name))
                 continue
-            with open(path.join(notetype_path, tmpl_name), "w", encoding="utf-8") as f:
+            with open(path.join(notetype_path, tmpl_name + _tmpl_ext), "w", encoding="utf-8") as f:
                 if _anki_front in tmpl and _anki_back in tmpl:
                     f.write(tmpl[_anki_front] + _delimiter + tmpl[_anki_back])
             count_template += 1
