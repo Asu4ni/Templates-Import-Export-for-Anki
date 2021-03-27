@@ -1,7 +1,8 @@
 {
-    "name": "Templates Import / Export",
     "package": "templatesIO",
-    "author": "Asu4ni",
-    "version": "0.1",
-    "homepage": "https://github.com/Asu4ni/Templates-Import-Export-for-Anki"
+    "name": "Templates Import / Export",
+    "mod": 1616812200,
+    "min_point_version": 0,
+    "max_point_version": 42,
+    "human_version": "0.2"
 }
