@@ -56,4 +56,8 @@ def get_dir():
     return folder if len(folder) != 0 else None
 
 
+def notify(msg: str, time: int = 5000):
+    utils.tooltip(msg, time)
+
+
 err = None

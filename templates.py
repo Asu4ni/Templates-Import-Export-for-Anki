@@ -42,6 +42,7 @@ def import_tmpls():
 
     count_notetype = 0
     count_template = 0
+    count_no_css = 0
     for name in notetypes:
         nt = window.col.models.byName(name)
         if not nt: continue
@@ -56,6 +57,8 @@ def import_tmpls():
             nt[_anki_css] = global_css + css if _merge_css else css
         elif global_css or css:
             nt[_anki_css] = css if css else global_css
+        else:
+            count_no_css += 1
 
         for tmpl in nt.get(_anki_templates, []):
             if _anki_name not in tmpl: continue
@@ -71,7 +74,8 @@ def import_tmpls():
             continue
         count_notetype += 1
         count_template += count
-    aqt.utils.tooltip("imported (Template: {} from NoteType:{})".format(count_template, count_notetype), 5000)
+    gui.notify("imported (Template: {}, CSS: {} from NoteType:{})".format(count_template, count_notetype - count_no_css,
+                                                                          count_notetype))
 
 
 def export_tmpls():
@@ -103,4 +107,4 @@ def export_tmpls():
                     f.write(tmpl[_anki_front] + _delimiter + tmpl[_anki_back])
             count_template += 1
         count_notetype += 1
-    aqt.utils.tooltip("exported (Template: {} from NoteType:{})".format(count_template, count_notetype), 5000)
+    gui.notify("exported (Template: {} from NoteType:{})".format(count_template, count_notetype))
