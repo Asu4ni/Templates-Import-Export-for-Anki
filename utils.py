@@ -1,16 +1,25 @@
 from aqt import mw as window
 from . import gui
 
+_config_map = {
+    "delimeter": "delimiter between front and back template",
+    "mergeCSS": "insert global CSS before individual ones of all note types",
+    "cssName": "CSS file name",
+    "tmplExt": "filename extensions for card template files"
+}
 
-def get_config(key: str):
+_cfg = {}
+
+
+def reload_config():
+    global _cfg
+    _cfg = window.addonManager.getConfig(__name__)
+
+
+def cfg(key: str):
     try:
-        r = window.addonManager.getConfig(__name__)[key]
+        r = _cfg[_config_map[key]]
     except KeyError:
         gui.show_error("\"{}\" missing in configuration!!".format(key))
         r = None
     return r
-
-
-
-def get_configs():
-    return window.addonManager.getConfig(__name__)

@@ -1,3 +1,6 @@
 {
-  "delimiter between front and back template": "```\n"
+  "delimiter between front and back template": "```\n",
+  "CSS file name": "style.css",
+  "insert global CSS before individual ones of all note types": false,
+  "filename extensions for card template files": ""
 }

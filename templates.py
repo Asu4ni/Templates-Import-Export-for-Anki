@@ -4,10 +4,27 @@ import aqt
 from os import path
 import os
 
+# key names used by Anki
+_anki_css = "css"
+_anki_templates = "tmpls"
+_anki_name = "name"
+_anki_front = "qfmt"
+_anki_back = "afmt"
+
+# config
+_delimiter = None
+_css_name = None
+
+
+def _reload_config():
+    global _delimiter, _css_name
+    _delimiter = utils.cfg("delimiter")
+    _css_name = utils.cfg("cssName")
+
 
 def import_tmpls():
     root = gui.get_dir()
-    delimiter = utils.get_config("delimiter between front and back template")
+    _reload_config()
 
     notetypes = [item for item in os.listdir(root) if os.path.isdir(path.join(root, item))]
 
@@ -17,16 +34,16 @@ def import_tmpls():
         nt = window.col.models.byName(name)
         if not nt: continue
 
-        file = path.join(root, name, "css")
+        file = path.join(root, name, _css_name)
         if os.path.exists(file):
             with open(file, "r", encoding="utf-8") as f:
-                nt["css"] = f.read()
-        for tmpl in nt.get("tmpls", []):
-            if "name" not in tmpl: continue
-            file = path.join(root, name, tmpl["name"])
+                nt[_anki_css] = f.read()
+        for tmpl in nt.get(_anki_templates, []):
+            if _anki_name not in tmpl: continue
+            file = path.join(root, name, tmpl[_anki_name])
             if os.path.exists(file):
                 with open(file, "r", encoding="utf-8") as f:
-                    tmpl["qfmt"], _, tmpl["afmt"] = f.read().partition(delimiter)
+                    tmpl[_anki_front], _, tmpl[_anki_back] = f.read().partition(_delimiter)
                 count_template += 1
         window.col.models.save(nt)
         count_notetype += 1
@@ -35,30 +52,30 @@ def import_tmpls():
 
 def export_tmpls():
     root = gui.get_dir()
-    delimiter = utils.get_config("delimiter between front and back template")
+    _reload_config()
 
     count_notetype = 0
     count_template = 0
     for nt in window.col.models.all():
         try:
-            notetype_name = nt.get("name")
+            notetype_name = nt.get(_anki_name)
         except KeyError:
             gui.show_error("The notetype has no name!!")
             continue
         notetype_path = path.join(root, notetype_name)
         os.makedirs(notetype_path, exist_ok=True)
-        if "css" in nt:
-            with open(path.join(notetype_path, "css"), "w", encoding="utf-8") as f:
-                f.write(nt["css"])
-        for tmpl in nt.get("tmpls", []):
+        if _anki_css in nt:
+            with open(path.join(notetype_path, _css_name), "w", encoding="utf-8") as f:
+                f.write(nt[_anki_css])
+        for tmpl in nt.get(_anki_templates, []):
             try:
-                tmpl_name = tmpl.get("name")
+                tmpl_name = tmpl.get(_anki_name)
             except KeyError:
                 gui.show_error("A template in notetype \"{}\" has no name!!".format(notetype_name))
                 continue
             with open(path.join(notetype_path, tmpl_name), "w", encoding="utf-8") as f:
-                if "qfmt" in tmpl and "afmt" in tmpl:
-                    f.write(tmpl["qfmt"] + delimiter + tmpl["afmt"])
+                if _anki_front in tmpl and _anki_back in tmpl:
+                    f.write(tmpl[_anki_front] + _delimiter + tmpl[_anki_back])
             count_template += 1
         count_notetype += 1
     aqt.utils.tooltip("exported (Template: {} from NoteType:{})".format(count_template, count_notetype), 5000)
