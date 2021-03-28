@@ -30,4 +30,5 @@ Functions & Things to notice
 
 Others
 ----
-The source can be found on GitHub: https://github.com/Asu4ni/Templates-Import-Export-for-Anki
++ The source can be found on GitHub: https://github.com/Asu4ni/Templates-Import-Export-for-Anki
++ The add-on page on AnkiWeb: https://ankiweb.net/shared/info/712027367
