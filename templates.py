@@ -3,6 +3,7 @@ from aqt import mw as window
 import aqt
 from os import path
 import os
+import datetime
 
 # key names used by Anki
 _anki_css = "css"
@@ -94,7 +95,8 @@ def export_tmpls():
         notetype_name_stripped = notetype_name.strip()
         if notetype_name_stripped != notetype_name:
             gui.show_error('⚠ Leading and/or trailing spaces detected in notetype name \"{}\". They have be removed on export. Before reimporting the template, you will need to remove them in the notetype name.'.format(notetype_name))
-        notetype_path = path.join(root, notetype_name_stripped)
+        current_time = datetime.datetime.now().strftime(" %Y_%m_%d %H-%M-%S")
+        notetype_path = path.join(root,current_time, notetype_name_stripped)
         os.makedirs(notetype_path, exist_ok=True)
         if _anki_css in nt:
             with open(path.join(notetype_path, _css_name), "w", encoding="utf-8") as f:
