@@ -30,9 +30,8 @@ def _reload_config():
 def import_tmpls():
     _reload_config()
     if _defaultfolder!="" and  _defaultfolder!="None" and _defaultfolder is not None:
-        root= path.normpath(_defaultfolder)
-    else:
-        root = gui.get_dir()
+        os.chdir(path.normpath(_defaultfolder))
+    root = gui.get_dir()
     if not root: return
 
     notetypes = [item for item in os.listdir(root) if os.path.isdir(path.join(root, item))]
@@ -82,11 +81,9 @@ def import_tmpls():
 
 
 def export_tmpls():
-    _reload_config()
     if _defaultfolder!="" and  _defaultfolder!="None" and _defaultfolder is not None:
-        root= path.normpath(_defaultfolder)
-    else:
-        root = gui.get_dir()
+        os.chdir(path.normpath(_defaultfolder))
+    root = gui.get_dir()
     if not root: return
 
     count_notetype = 0
