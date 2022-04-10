@@ -16,7 +16,7 @@ _delimiter = None
 _css_name = None
 _tmpl_ext = None
 _merge_css = None
-
+_defaultfolder = None
 
 def _reload_config():
     utils.reload_config()
@@ -25,12 +25,15 @@ def _reload_config():
     _css_name = utils.cfg("cssName")
     _tmpl_ext = utils.cfg("tmplExt")
     _merge_css = utils.cfg("mergeCSS")
-
+    _defaultfolder = utils.cfg("defaultfolder")
 
 def import_tmpls():
-    root = gui.get_dir()
-    if not root: return
     _reload_config()
+    if _defaultfolder!="" and  _defaultfolder!="None" and _defaultfolder is not None:
+        root= path.normpath(_defaultfolder)
+    else:
+        root = gui.get_dir()
+    if not root: return
 
     notetypes = [item for item in os.listdir(root) if os.path.isdir(path.join(root, item))]
 
@@ -79,9 +82,12 @@ def import_tmpls():
 
 
 def export_tmpls():
-    root = gui.get_dir()
-    if not root: return
     _reload_config()
+    if _defaultfolder!="" and  _defaultfolder!="None" and _defaultfolder is not None:
+        root= path.normpath(_defaultfolder)
+    else:
+        root = gui.get_dir()
+    if not root: return
 
     count_notetype = 0
     count_template = 0
