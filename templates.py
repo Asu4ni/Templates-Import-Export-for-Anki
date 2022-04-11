@@ -86,7 +86,7 @@ def export_tmpls():
 
     count_notetype = 0
     count_template = 0
-    current_time = datetime.datetime.now().strftime(" %Y_%m_%d %H-%M-%S")
+    current_time = datetime.datetime.now().strftime("%Y_%m_%d %H-%M-%S")
     for nt in window.col.models.all():
         try:
             notetype_name = nt.get(_anki_name)
