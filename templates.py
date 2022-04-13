@@ -20,7 +20,7 @@ _defaultfolder = None
 
 def _reload_config():
     utils.reload_config()
-    global _delimiter, _css_name, _tmpl_ext, _merge_css
+    global _delimiter, _css_name, _tmpl_ext, _merge_css, _defaultfolder 
     _delimiter = utils.cfg("delimiter")
     _css_name = utils.cfg("cssName")
     _tmpl_ext = utils.cfg("tmplExt")
