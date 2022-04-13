@@ -5,7 +5,9 @@ _config_map = {
     "delimiter": "delimiter between front and back template",
     "mergeCSS": "insert global CSS before individual ones of all note types",
     "cssName": "CSS file name",
-    "tmplExt": "filename extensions for card template files"
+    "tmplExt": "filename extensions for card template files",
+    "defaultfolder": "Default folder (for windows, it should be as formated as C:\\Users\\user\\...)"
+
 }
 
 _cfg = {}
