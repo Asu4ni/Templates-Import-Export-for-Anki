@@ -1,8 +1,9 @@
-from . import gui, utils
-from aqt import mw as window
-import aqt
-from os import path
 import os
+from os import path
+
+from aqt import mw as window
+
+from . import gui, utils
 
 # key names used by Anki
 _anki_css = "css"
@@ -12,10 +13,10 @@ _anki_front = "qfmt"
 _anki_back = "afmt"
 
 # config
-_delimiter = None
-_css_name = None
-_tmpl_ext = None
-_merge_css = None
+_delimiter: str = "```\n"
+_css_name: str = "style.css"
+_tmpl_ext: str = ""
+_merge_css: bool = False
 
 
 def _reload_config():
@@ -93,7 +94,9 @@ def export_tmpls():
             continue
         notetype_name_stripped = notetype_name.strip()
         if notetype_name_stripped != notetype_name:
-            gui.show_error('⚠ Leading and/or trailing spaces detected in notetype name \"{}\". They have be removed on export. Before reimporting the template, you will need to remove them in the notetype name.'.format(notetype_name))
+            gui.show_error("⚠ Leading and/or trailing spaces detected in notetype name \"{}\". They have be removed "
+                           "on export. Before reimporting the template, you will need to remove them in the notetype "
+                           "name.".format(notetype_name))
         notetype_path = path.join(root, notetype_name_stripped)
         os.makedirs(notetype_path, exist_ok=True)
         if _anki_css in nt:

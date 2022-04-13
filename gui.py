@@ -1,3 +1,4 @@
+from PyQt5 import QtCore
 from aqt import mw as window, utils, qt, addons
 import aqt
 from . import templates
@@ -11,11 +12,10 @@ def _edit_config():
 def _help():
     file = os.path.join(os.path.dirname(os.path.realpath(__file__)), "README.md")
     if os.path.exists(file):
-        doc = ""
         with open(file, "r", encoding="utf-8") as f:
             doc = f.read()
         box = aqt.QMessageBox(window)
-        box.setTextFormat(3)  # Markdown
+        box.setTextFormat(QtCore.Qt.MarkdownText)
         box.setText(doc)
         box.exec()
     else:
