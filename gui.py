@@ -1,4 +1,4 @@
-from PyQt5 import QtCore
+from PyQt6 import QtCore
 from aqt import mw as window, utils, qt, addons
 import aqt
 from . import templates
@@ -15,7 +15,7 @@ def _help():
         with open(file, "r", encoding="utf-8") as f:
             doc = f.read()
         box = aqt.QMessageBox(window)
-        box.setTextFormat(QtCore.Qt.MarkdownText)
+        box.setTextFormat(QtCore.Qt.TextFormat.MarkdownText)
         box.setText(doc)
         box.exec()
     else:
